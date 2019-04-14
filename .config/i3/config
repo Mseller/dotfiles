@@ -195,8 +195,9 @@ bindsym XF86AudioPrev 	exec playerctl previous
 # Autostart
 	# Setting background
 exec_always --no-startup-id feh --bg-fill ~/.config/wallpapers/spaceshuttle.png
-	# Setting up second monitor
-exec --no-startup-id xrandr --output HDMI-1-3 --mode "1920x1080" --left-of HDMI-2
+	# Setting up second monitors
+exec --no-startup-id xrandr --output HDMI-0 --mode "1920x1080"
+exec --no-startup-id xrandr --output HDMI-1-2 --mode "1920x1080" --right-of HDMI-0
 	# Start numpad
 exec setleds -D +num
 exec spotify
