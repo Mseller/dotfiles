@@ -16,6 +16,73 @@
                 },
                 "rules": [
                     {
+                        "description": "Change input source on HYPER+l",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_command",
+                                            "left_option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "select_input_source": {
+                                            "input_source_id": "^com\\.apple\\.keylayout\\.US$"
+                                        }
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "language": "^sv$"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_command",
+                                            "left_option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "select_input_source": {
+                                            "input_source_id": "^com\\.apple\\.keylayout\\.Swedish-Pro$"
+                                        }
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "language": "^en$"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "description": "CAPS_LOCK to HYPER (SHIRT+COMMAND+OPTION+CONTROL) or ESCAPE (If Alone)",
                         "manipulators": [
                             {
