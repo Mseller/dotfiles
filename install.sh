@@ -18,4 +18,6 @@ brew install go
 # Symlink dot files with stow
 stow kitty
 stow nvim
+stow tmux
 stow karbiner
+
