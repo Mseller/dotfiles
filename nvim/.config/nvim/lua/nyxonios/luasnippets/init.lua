@@ -1,0 +1,1 @@
+require 'nyxonios.luasnippets.go'

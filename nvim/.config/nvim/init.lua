@@ -1,1 +1,1 @@
-require("nyxonios")
+require 'nyxonios'

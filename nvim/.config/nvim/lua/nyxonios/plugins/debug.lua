@@ -7,14 +7,15 @@
 -- a build flag.
 return {
   'mfussenegger/nvim-dap',
-  dependencies  = {
+  dependencies = {
     'rcarriga/nvim-dap-ui',
-    'leoluz/nvim-dap-go'
+    'leoluz/nvim-dap-go',
+    'theHamsta/nvim-dap-virtual-text',
   },
   config = function()
-    local dap = require('dap')
-    local dapui = require('dapui')
-    local dapgo = require('dap-go')
+    local dap = require 'dap'
+    local dapui = require 'dapui'
+    local dapgo = require 'dap-go'
     dapgo.setup()
 
     require('dapui').setup()

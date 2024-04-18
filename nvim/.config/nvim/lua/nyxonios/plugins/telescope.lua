@@ -35,18 +35,44 @@ end
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 return {
-  'nvim-telescope/telescope.nvim', tag = '0.1.x',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  'nvim-telescope/telescope.nvim',
+  tag = '0.1.5',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    { 'nvim-telescope/telescope-ui-select.nvim' },
+    { 'nvim-tree/nvim-web-devicons' },
+  },
   config = function()
+    require('telescope').setup {
+      defaults = {
+        file_ignore_patterns = {
+          '.git/*',
+          'node_modules/',
+        },
+      },
+      extensions = {
+        ['ui-select'] = {
+          require('telescope.themes').get_dropdown(),
+        },
+      },
+    }
     -- Enable telescope fzf native, if installed
     pcall(require('telescope').load_extension, 'fzf')
+    pcall(require('telescope').load_extension, 'ui-select')
 
-    local builtin = require('telescope.builtin')
+    local builtin = require 'telescope.builtin'
 
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = "[F]ind [F]iles"})
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = "[F]ind [G]rep"})
-    vim.keymap.set('n', '<leader>fG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep in Git Root' })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = "[F]ind in [B]uffers"})
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
+    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
+
+    vim.keymap.set('n', '<leader>ff', function()
+      return builtin.find_files { hidden = true }
+    end, { desc = '[F]ind [F]iles' })
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep' })
+    vim.keymap.set('n', '<leader>fG', ':LiveGrepGitRoot<cr>', { desc = '[F]ind by [G]rep in Git Root' })
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind in [B]uffers' })
+    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
+
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
       require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -54,5 +80,9 @@ return {
         previewer = false,
       })
     end, { desc = '[/] Fuzzily search in current buffer' })
-  end
+
+    vim.keymap.set('n', '<leader>fn', function()
+      builtin.find_files { cwd = vim.fn.stdpath 'config' }
+    end, { desc = '[F]ind [N]eovim files' })
+  end,
 }

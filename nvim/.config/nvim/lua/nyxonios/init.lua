@@ -1,18 +1,22 @@
-require("nyxonios.set")
-require("nyxonios.remap")
+require 'nyxonios.commands'
+require 'nyxonios.set'
+require 'nyxonios.remap'
+require 'nyxonios.autocmd'
 
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
+  vim.fn.system {
     'git',
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
     '--branch=stable', -- latest stable release
     lazypath,
-  })
+  }
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup("nyxonios.plugins")
-
+require('lazy').setup {
+  spec = 'nyxonios.plugins',
+  change_detection = { notify = false },
+}
