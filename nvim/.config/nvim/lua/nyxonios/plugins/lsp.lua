@@ -19,6 +19,8 @@ return {
         lsp_keymaps = false,
         dap_debug_keymap = false,
       }
+      vim.keymap.set('n', '<leader>tf', '<cmd>GoTestFunc<CR>')
+      vim.keymap.set('n', '<leader>db', '<cmd>GoDebug<CR>')
     end,
     event = { 'CmdlineEnter' },
     ft = { 'go', 'gomod' },
