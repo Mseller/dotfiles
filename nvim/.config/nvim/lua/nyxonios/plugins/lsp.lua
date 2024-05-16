@@ -13,9 +13,7 @@ return {
         lsp_inlay_hints = {
           enable = false,
         },
-        lsp_cfg = {
-          build_flags = { '-tags=integration' },
-        },
+        lsp_cfg = true,
         lsp_keymaps = false,
         dap_debug_keymap = false,
       }
